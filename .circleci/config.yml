@@ -1306,7 +1306,7 @@ steps-tests: &steps-tests
           cd src
           if  [ "$TARGET_ARCH" == "arm64" ] &&[ "`uname`" == "Darwin" ]; then
             export ELECTRON_SKIP_NATIVE_MODULE_TESTS=true
-            (cd electron && node script/yarn test --runners=main, remote --trace-uncaught --enable-logging)
+            (cd electron && node script/yarn test --runners=main,remote --trace-uncaught --enable-logging)
           else
             (cd electron && node script/yarn test --runners=main --trace-uncaught --enable-logging --files $(circleci tests glob spec-main/*-spec.ts | circleci tests split))
             (cd electron && node script/yarn test --runners=remote --trace-uncaught --enable-logging --files $(circleci tests glob spec/*-spec.js | circleci tests split))
