@@ -2638,7 +2638,7 @@ workflows:
 
       - osx-testing-arm64-tests:
           requires:
-            - osx-testing-x64
+            - osx-testing-arm64
 
       - mas-testing-x64:
           requires:
