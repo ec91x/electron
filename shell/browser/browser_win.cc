@@ -658,7 +658,7 @@ bool Browser::SetBadgeCount(base::Optional<int> count) {
 }
 
 void Browser::UpdateBadgeContents(HWND hwnd) {
-  auto badge = std::make_unique<SkBitmap>();
+  SkBitmap badge;
   if (badge_content_) {
     std::string content = badge_content_.value();
     constexpr int kOverlayIconSize = 16;
@@ -674,9 +674,8 @@ void Browser::UpdateBadgeContents(HWND hwnd) {
     constexpr int kMaxTextSize = 24;  // Max size for our text.
     constexpr int kMinTextSize = 7;   // Min size for our text.
 
-    badge->allocN32Pixels(kOverlayIconSize, kOverlayIconSize);
-    SkCanvas canvas(*badge.get(),
-                    skia::LegacyDisplayGlobals::GetSkSurfaceProps());
+    badge.allocN32Pixels(kOverlayIconSize, kOverlayIconSize);
+    SkCanvas canvas(*badge, skia::LegacyDisplayGlobals::GetSkSurfaceProps());
 
     SkPaint paint;
     paint.setAntiAlias(true);
@@ -706,7 +705,7 @@ void Browser::UpdateBadgeContents(HWND hwnd) {
         kRadius - bounds.width() / 2 - bounds.x(),
         kRadius - bounds.height() / 2 - bounds.y(), font, paint);
   }
-  taskbar_host_.SetOverlayIcon(hwnd, badge.get(), badge_alt_string_);
+  taskbar_host_.SetOverlayIcon(hwnd, badge, badge_alt_string_);
 }
 
 void Browser::SetLoginItemSettings(LoginItemSettings settings) {

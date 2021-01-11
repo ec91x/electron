@@ -47,7 +47,9 @@ class TaskbarHost {
                       const NativeWindow::ProgressState state);
 
   // Set the overlay icon in taskbar.
-  bool SetOverlayIcon(HWND window, SkBitmap* overlay, const std::string& text);
+  bool SetOverlayIcon(HWND window,
+                      const SkBitmap& overlay,
+                      const std::string& text);
 
   // Set the region of the window to show as a thumbnail in taskbar.
   bool SetThumbnailClip(HWND window, const gfx::Rect& region);
